@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваш новогодний альбом</title>
+    <style>
+        body {
+            background-color: #A3C1E0; /* Нежно-голубой фон */
+            color: white; /* Белый цвет шрифта */
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .photo-box {
+            border: 2px solid white;
+            width: 300px;
+            height: 300px;
+            margin: 10px auto;
+            display: inline-block;
+            position: relative;
+        }
+        .photo-box img {
+            width: 300px;
+            height: 300px;
+        }
+        .photo-label {
+            position: absolute;
+            bottom: -30px; /* Позиция надписи под окошком */
+            width: 100%;
+        }
+        .big-box {
+            border: 2px solid white;
+            width: 300px;
+            height: 100px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white;
+            color: #A3C1E0; /* Цвет кнопки */
+            border: none;
+            cursor: pointer;
+        }
+        .rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none; /* Не мешает кликам */
+        }
+    </style>
+</head>
+<body>
+    <h1>Мой Новогодний альбом</h1>
+    
+    <div class="photo-box">
+        <img src="img/гринч.jpg" alt="">
+        <div class="photo-label">СОНЯ,ПЕТЯ,ЛИЛЬКА</div>
+    </div>
+    <div class="photo-box">
+        <img src="img/олеся.jpg" alt="">
+        <div class="photo-label">Олеся лесенка</div>
+    </div>
+    <div class="photo-box">
+        <img src="img/стихийцы.jpg" alt="">
+        <div class="photo-label">Наше общее фото</div>
+    </div>
+    <div class="photo-box">
+        <img src="img/саша.jpg" alt="">
+        <div class="photo-label">Саша Дог</div>
+    </div>
+    <div class="photo-box">
+        <img src="img/сан.jpg" alt="">
+        <div class="photo-label">Cан</div>
+    </div>
+    <div class="photo-box">
+        <img src="img/гипноденс.jpg" alt="">
+        <div class="photo-label">гипноденс хой</div>
+    </div>
+
+    <div class="big-box">
+        С Новым годом.
+    </div>
+
+    <button onclick="startRain()">сила стихии</button>
+
+    <script>
+        function startRain() {
+            const rainDiv = document.createElement('div');
+            rainDiv.className = 'rain';
+            
+            for (let i = 0; i < 100; i++) {
+                const drop = document.createElement('div');
+                drop.style.position = 'absolute';
+                drop.style.width = '2px';
+                drop.style.height = '10px';
+                drop.style.backgroundColor = 'white';
+                drop.style.left = Math.random() * window.innerWidth + 'px';
+                drop.style.animation = `fall ${Math.random() * 2 + 1}s linear infinite`;
+                rainDiv.appendChild(drop);
+                
+                // Adding keyframes for the falling effect
+                const styleSheet = document.styleSheets[0];
+                styleSheet.insertRule(`
+                    @keyframes fall {
+                        to { transform: translateY(${window.innerHeight}px); }
+                    }
+                `, styleSheet.cssRules.length);
+            }
+
+            document.body.appendChild(rainDiv);
+        }
+    </script>
+</body>
+</html>
